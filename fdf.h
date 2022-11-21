@@ -30,18 +30,15 @@ typedef struct  s_data {
   int         bits_per_pixel;
   int         line_length;
   int         endian;
+  int         h;
+  int         w;
 }               t_data;
 
 typedef struct s_dot{
   int x;
   int y;
   int z;
-  int is_end;
 }   t_dot;
-
-typedef struct s_matrix{
-  t_dot dot;
-} t_matrix;
 
 typedef struct  s_vars {
     void        *mlx;
@@ -54,12 +51,18 @@ typedef struct s_color{
   int b;
 }    t_color; 
 
+//parsing
+t_dot **make_matrix(char *file_name, t_data *data);
 //get next line utils
 size_t	ft_strlen(const char *str);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 int		ft_strjoin(char **dest, char *s2);
 int		ft_strchr(const char *s, int c);
 char	*get_next_line(int fd);
+
+//draw_line
+void bresenham(t_dot c1, t_dot c2, t_data *image, int argb);
+void draw_by_dots(t_dot **matrix, t_data *data);
 
 //utils
 void ft_print_error(char *message);

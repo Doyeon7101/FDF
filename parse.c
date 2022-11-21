@@ -60,7 +60,6 @@ void add_to_matrix(char *file_name, t_dot **matrix, int x, int y)
             printf("x : %d, y : %d, z : %d \n", matrix[yp][xp].x, matrix[yp][xp].y, matrix[yp][xp].z);
             
         }
-        matrix[yp][--xp].is_end = 1;
         while (xp-- > 0)
             free(z_value[xp]);
         free(line);
@@ -77,7 +76,7 @@ t_dot **allocate_memory_for_matrix(char *file_name, int *x, int *y, int fd)
     return(new);
 }
 
-t_dot **make_matrix(char *file_name)
+t_dot **make_matrix(char *file_name, t_data *data)
 {
     t_dot **matrix;
     char *line;
@@ -90,5 +89,7 @@ t_dot **make_matrix(char *file_name)
     matrix= allocate_memory_for_matrix(file_name, &x, &y, fd);
     add_to_matrix(file_name, matrix, x, y);
     close(fd);
+    data->h = y;
+    data->w = x;
     return(matrix);
 }

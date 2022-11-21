@@ -76,12 +76,12 @@ int main(int argc, char **argv)
   image.img = mlx_new_image(vars.mlx, 1280, 720); // 이미지 객체 생성
   image.addr = mlx_get_data_addr(image.img, &image.bits_per_pixel, &image.line_length, &image.endian); // 이미지 주소 할당
 
-  c1.x = 20;
+  c1.x = 100;
   c1.y = 10;
-  c2.x = 1000;
+  c2.x = 300;
   c2.y = 700;
-  rgb.r = 255;
-  rgb.g = 0;
+  rgb.r = 135;
+  rgb.g = 200;
   rgb.b = 0;
 
   bresenham(c1, c2, &image, create_argb(0, rgb.r, rgb.g, rgb.b));

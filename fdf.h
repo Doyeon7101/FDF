@@ -51,6 +51,7 @@ typedef struct s_color{
   int b;
 }    t_color; 
 
+void my_mlx_pixel_put(t_data *data, int x, int y, int color);
 //parsing
 t_dot **make_matrix(char *file_name, t_data *data);
 //get next line utils
@@ -70,5 +71,6 @@ void test_func(int i);
 char	**ft_split(char const *s, char c);
 size_t	func_chunk_cnt(char const *s, char c);
 int	ft_revers_strncmp(const char *s1, const char *s2, size_t n);
+void	ft_putstr_fd(char *s, int fd);
 
 #endif

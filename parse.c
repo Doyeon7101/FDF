@@ -57,7 +57,6 @@ void add_to_matrix(char *file_name, t_dot **matrix, int x, int y)
             matrix[yp][xp].x = xp;
             matrix[yp][xp].y = yp;
             matrix[yp][xp].z = atoi(z_value[xp]);
-            printf("x : %d, y : %d, z : %d \n", matrix[yp][xp].x, matrix[yp][xp].y, matrix[yp][xp].z);
             
         }
         while (xp-- > 0)
@@ -88,7 +87,6 @@ t_dot **make_matrix(char *file_name, t_data *data)
         ft_print_error("Invalid extension name");
     matrix= allocate_memory_for_matrix(file_name, &x, &y, fd);
     add_to_matrix(file_name, matrix, x, y);
-    close(fd);
     data->h = y;
     data->w = x;
     return(matrix);

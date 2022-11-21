@@ -1,3 +1,0 @@
-make_matrix
-allocate_memory_for_matrix -> check_array_size -> malloc_arry
-add_to_matrix

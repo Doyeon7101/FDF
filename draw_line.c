@@ -1,50 +1,50 @@
 #include "fdf.h"
 
+void my_mlx_pixel_put(t_data *data, int x, int y, int color)
+{
+  char *dst;
+
+  dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel /  8));
+  *(unsigned int*)dst = color;
+}
+
+double return_max(double a, double b)
+{
+    if (a > b)
+        return(a);
+    else
+        return(b);
+}
+void	bresenham(t_dot a, t_dot b, t_data *image, int argb)
+{
+	double dx;
+	double dy;
+	double max;
+
+	dx = b.x - a.x;
+	dy = b.y - a.y;
+	max = return_max(fabs(dx), fabs(dy));
+	dx /= max;
+	dy /= max;
+	while ((int)(a.x - b.x) || (int)(a.y - b.y))
+	{
+       my_mlx_pixel_put(image, a.x, a.y, argb);
+		a.x += dx;
+		a.y += dy;
+		if (a.x > 1280 || a.y > 720 || a.y < 0 || a.x < 0)
+			break ;
+	}
+} 
+
+void update_dots(t_dot *dot, int length)
+{
+    dot->x *= length;
+    dot->y *= length;
+}
+
 int create_argb(int t, int r, int g, int b)
 {
   return (t << 24 | r << 16 | g << 8 | b);
-}
-
-void bresenham(t_dot c1, t_dot c2, t_data *image, int argb)
-{
-    t_dot now;
-    int f; //판별식
-    int dx;
-    int dy;
-
-    dx = c2.x - c1.x;
-    dy = c2.y - c1.y;
-    now.x = c1.x;
-    now.y = c1.y;
-    f = (2 * dy) - dx;
-    while ((now.x)++ < c2.x)
-    {
-      if (f <= 0)
-        f = f + (2 * dy);
-      else
-      {
-        f = f + 2 * (dy - dx);
-        (now.y)++;
-      }
-       my_mlx_pixel_put(image, now.x, now.y, argb);
-    }
-}
-/**
- * - 정점간 최적거리 구하기
- * - 최적거리 바탕으로 간선 잇기
- * - 
-
-int return_best_length(t_dot **matrix, int h, int w, int x, int y)
-{
-}
- **/
-
-void update_dots(t_dot dot_a, t_dot dot_b, t_data *data)
-{
-    dot_a.x *= data->line_length;
-    dot_a.y *= data->line_length;
-    dot_b.x *= data->line_length;
-    dot_b.x *= data->line_length;
 }
 
 void draw_by_dots(t_dot **matrix, t_data *data)
@@ -52,18 +52,64 @@ void draw_by_dots(t_dot **matrix, t_data *data)
     int l;
     int x;
     int y;
+    int h;
+    int w;
 
+    h = data->h;
+    w = data->w;
     x = -1;
     y = -1;
     l = 40; // return_best_length
-    y++;
-    while (++y < data->h - 1)
+    while (++y < h)
+    {
+        while (++x < data->w)
+            update_dots(&matrix[y][x],l);
+        x= -1;
+    }
+    y = -1;
+    x = -1;
+    while (++y < h-1)
+    {
+        while ((++x < w-1))
+        {
+            bresenham(matrix[y][x], matrix[y][x+1], data, create_argb(0,102,255,178));
+            bresenham(matrix[y][x], matrix[y+1][x], data, create_argb(0,102,255,178));
+        }
+        x = -1;
+    }
+    x = -1;
+    y = -1;
+    while (++x < w-1)
+        bresenham(matrix[h-1][x], matrix[h-1][x+1], data, create_argb(0,102,255,178));
+    while (++y < h-1)
+        bresenham(matrix[y][w-1], matrix[y+1][w-1], data, create_argb(0,102,255,178));
+    return;
+
+}
+
+
+
+/** note
+    while (++y < data->h)
+    {
+        while (++x < data->w-1)
+            update_dots(&matrix[y][x],l);
+        x= -1;
+    }
+    y = -1;
+    x = -1;
+    while (++y < data->h)
     {
         while (++x < data->w - 1)
-        {
-            update_dots(matrix[y][x], matrix[x+1][y+1], data);
-            bresenham(matrix[y][x], matrix[x+1][y+1], data->img, create_argb(0, 135,200,0));
-        }
+            bresenham(matrix[y][x], matrix[y][x+1], data, create_argb(0, 0,255,0));
+        x = -1;
     }
-    return;
-}
+    y = -1;
+    x = -1;
+    while (++x < data->w)
+    {
+        while (++y < data->h - 1)
+            bresenham(matrix[y][x], matrix[y+1][x], data, create_argb(0, 0,255,0));
+        y = -1;
+
+**/

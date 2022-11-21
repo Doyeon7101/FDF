@@ -12,13 +12,6 @@
 
 #include "fdf.h"
 
-void my_mlx_pixel_put(t_data *data, int x, int y, int color)
-{
-  char *dst;
-
-  dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel /  8));
-  *(unsigned int*)dst = color;
-}
 
 
 int key_hook(int keycode, t_vars *vars)
@@ -47,9 +40,9 @@ int main(int argc, char **argv)
   image.img = mlx_new_image(vars.mlx, 1280, 720); // 이미지 객체 생성
   image.addr = mlx_get_data_addr(image.img, &image.bits_per_pixel, &image.line_length, &image.endian); // 이미지 주소 할당
 
-  make_matrix(*++argv, &image);
-  // bresenham(c1, c2, &image, create_argb(0, rgb.r, rgb.g, rgb.b));
+  matrix = make_matrix(*++argv, &image);
   draw_by_dots(matrix, &image);
+  // bresenham(c1, c2, &image, create_argb(0, rgb.r, rgb.g, rgb.b));
   mlx_put_image_to_window(vars.mlx, vars.win, image.img, 0, 0);
   mlx_key_hook(vars.win, key_hook, &vars);
   mlx_loop(vars.mlx);

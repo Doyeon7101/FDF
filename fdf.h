@@ -6,7 +6,7 @@
 /*   By: dpark <dpark@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 05:14:45 by dpark             #+#    #+#             */
-/*   Updated: 2022/11/20 16:53:00 by dpark            ###   ########.fr       */
+/*   Updated: 2022/11/21 14:56:01 by dpark            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FDF_H
 
 #include "mlx.h"
+#include <fcntl.h>
 #include <unistd.h>
 #include <math.h>
 #include <stdlib.h>
@@ -31,10 +32,16 @@ typedef struct  s_data {
   int         endian;
 }               t_data;
 
-typedef struct s_crdnt {
+typedef struct s_dot{
   int x;
   int y;
-}   t_crdnt;
+  int z;
+  int is_end;
+}   t_dot;
+
+typedef struct s_matrix{
+  t_dot dot;
+} t_matrix;
 
 typedef struct  s_vars {
     void        *mlx;
@@ -54,6 +61,11 @@ int		ft_strjoin(char **dest, char *s2);
 int		ft_strchr(const char *s, int c);
 char	*get_next_line(int fd);
 
-//
+//utils
+void ft_print_error(char *message);
 void test_func(int i);
+char	**ft_split(char const *s, char c);
+size_t	func_chunk_cnt(char const *s, char c);
+int	ft_revers_strncmp(const char *s1, const char *s2, size_t n);
+
 #endif

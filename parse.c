@@ -1,12 +1,99 @@
 #include "fdf.h"
 
-/** 파싱, 전처리 
- * - 각 정점의 좌표는 스택으로 구현한다. (후에 각 좌표를 간선으로 그을것)
- * 1. 파싱
- *  - gnl -> 한줄씩 읽고 temp에 각 line 추출
- *  - 추출한 line 을 바탕으로 문자열 인덱싱, getnbr로 정수형 변환
- *  - 변환한 숫자는 스택에 꽂기 (line free 잊지말것~)
- * 2. Resize
- *  - 입력받은 화면 크기 바탕으로 각 정점간의 거리 계산(간선거리 return) -> 어떻게할레..
- *  - 
- **/
+void check_array_size(int fd, int *x, int *y)
+{
+    char *line;
+    int i;
+
+    i = 0;
+    *y = 0;
+    line = get_next_line(fd);
+    *x = func_chunk_cnt(line, ' ');
+    while(line)
+    {
+        if (*x != func_chunk_cnt(line, ' '))
+            ft_print_error("invalid map size");
+        (*y)++;
+        free(line);
+        line = get_next_line(fd);
+    }
+    return ;
+}
+
+t_dot **malloc_arry(int x, int y)
+{
+    t_dot **new;
+
+    new[y] = 0;
+    new = (t_dot**)malloc(sizeof(t_dot) * (y + 1));
+    while (y > 0)
+    {
+        new[y] = (t_dot *)malloc(sizeof(t_dot) * (x));
+        y--;
+    }
+    if (!new)
+        ft_print_error("malloc faild");
+    return(new);
+}
+
+void add_to_matrix(int fd, t_dot **matrix, int x, int y)
+{
+    char *line;
+    char **z_value;
+    int yp;
+    int xp;
+    
+    yp = -1;
+    xp = -1;
+    while (yp++ < y)
+    {
+        line = get_next_line(fd);
+        z_value = ft_split(line, ' ');
+        while (xp++ < x)
+        {
+            matrix[yp][xp].x = xp;
+            matrix[yp][xp].y = yp;
+            matrix[yp][xp].z = atoi(z_value[xp]);
+        }
+        while (xp-- > 0)
+            free(z_value[xp]);
+        free(line);
+    }
+}
+
+t_dot **allocate_memory_for_matrix(char *file_name, int *x, int *y, int fd)
+{
+    int fd;
+    t_dot **new;
+
+    check_array_size(fd, &x, &y);
+    new = malloc_arry(x, y);
+    return(new);
+}
+
+t_dot **make_matrix(char *file_name)
+{
+    t_dot **matrix;
+    char *line;
+    int fd;
+    int x;
+    int y;
+
+    if(!ft_revers_strncmp(file_name, ".fdf", 4))
+        ft_print_error("Invalid extension name");
+    if ((fd = open(file_name, O_RDONLY)) == -1)
+        ft_print_error("open error");
+    matrix= allocate_memory_for_matrix(file_name, &x, &y, fd);
+    add_to_matrix(fd, matrix, x, y);
+    close(fd);
+    return(matrix);
+}
+
+/**
+int main(int argc, char **argv)
+{
+    argv++;
+    make_matrix(*argv);
+    // while(1);
+}
+**/

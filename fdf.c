@@ -6,7 +6,7 @@
 /*   By: dpark <dpark@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 03:42:08 by dpark             #+#    #+#             */
-/*   Updated: 2022/11/20 16:57:31 by dpark            ###   ########.fr       */
+/*   Updated: 2022/11/21 15:30:16 by dpark            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void my_mlx_pixel_put(t_data *data, int x, int y, int color)
   *(unsigned int*)dst = color;
 }
 
-void bresenham(t_crdnt c1, t_crdnt c2, t_data *image, int argb)
+void bresenham(t_dot c1, t_dot c2, t_data *image, int argb)
 {
-    t_crdnt now;
+    t_dot now;
     int f; //판별식
     int dx;
     int dy;
@@ -66,10 +66,10 @@ int main(int argc, char **argv)
   t_vars vars;
   t_data image;
   t_color rgb;
-  t_crdnt c1, c2;
+  t_dot c1, c2;
 
   if (argc != 2)
-    return(0);
+    ft_print_error("error1");
   
   vars.mlx = mlx_init();
   vars.win = mlx_new_window(vars.mlx, 1280, 720, "FDF");

@@ -6,7 +6,7 @@
 /*   By: dpark <dpark@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 05:14:45 by dpark             #+#    #+#             */
-/*   Updated: 2022/11/23 15:56:10 by dpark            ###   ########.fr       */
+/*   Updated: 2022/11/23 22:47:15 by dpark            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 
 #ifndef BUFFER_SIZE
 # define BUFFER_SIZE 500
+#define WIN_W_SIZE 1920
+#define WIN_H_SIZE 1280
 #endif
 
 typedef struct  s_data {
@@ -32,6 +34,9 @@ typedef struct  s_data {
   int         endian;
   int         h;
   int         w;
+  void        *mlx;
+  void        *win;
+
 }               t_data;
 
 typedef struct s_dot{

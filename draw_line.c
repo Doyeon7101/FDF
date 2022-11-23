@@ -6,7 +6,7 @@
 /*   By: dpark <dpark@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 19:44:33 by dpark             #+#    #+#             */
-/*   Updated: 2022/11/23 20:19:36 by dpark            ###   ########.fr       */
+/*   Updated: 2022/11/23 20:41:45 by dpark            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	draw_by_dots(t_dot **matrix, t_data *data)
 		while (1)
 		{
 			if (matrix[y + 1])
-				bresenham(matrix[y][x], matrix[y+1][x], data, create_argb(0,0,255,0));
+				bresenham(matrix[y][x], matrix[y+1][x], data, create_argb(0, 0, 255, 0));
 			if(x != data->w - 1)
 				bresenham(matrix[y][x], matrix[y][x+1], data, create_argb(0, 0, 255, 0));
 			else
@@ -102,6 +102,5 @@ void	draw_by_dots(t_dot **matrix, t_data *data)
 		}
 		x = 0;
 	}
-
 	return ;
 }

@@ -6,19 +6,25 @@
 /*   By: dpark <dpark@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 03:42:08 by dpark             #+#    #+#             */
-/*   Updated: 2022/11/23 20:12:20 by dpark            ###   ########.fr       */
+/*   Updated: 2022/11/23 23:21:18 by dpark            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+void init_mlx(t_data *mlx)
+{
+  mlx->mlx = mlx_init();
+  mlx->win = mlx_new_window(mlx->mlx, WIN_W_SIZE, WIN_H_SIZE, "FDF");
+  mlx->img = mlx_new_image(mlx->mlx, WIN_W_SIZE, WIN_H_SIZE); // 이미지 객체 생성
+  mlx->addr = mlx_get_data_addr(mlx->img, &mlx->bits_per_pixel, &mlx->line_length, &mlx->endian); // 이미지 주소 할당
+}
 
-
-int key_hook(int keycode, t_vars *vars)
+int key_hook(int keycode, t_data *image)
 {
   if(keycode == 53)
   {
-    mlx_destroy_window(vars->mlx, vars->win);
+    mlx_destroy_window(image->mlx, image->win);
     exit(0);
   }
   return(0);
@@ -26,24 +32,18 @@ int key_hook(int keycode, t_vars *vars)
 
 int main(int argc, char **argv)
 {
-  t_vars vars;
-  t_data image;
+  t_data mlx;
   t_color rgb;
   t_dot **matrix;
 
   if (argc != 2)
     ft_print_error("error1");
-  
-  vars.mlx = mlx_init();
-  vars.win = mlx_new_window(vars.mlx, 1920, 1280, "FDF");
-  image.img = mlx_new_image(vars.mlx, 1920, 1280); // 이미지 객체 생성
-  image.addr = mlx_get_data_addr(image.img, &image.bits_per_pixel, &image.line_length, &image.endian); // 이미지 주소 할당
-
-  matrix = make_matrix(*++argv, &image);
-  draw_by_dots(matrix, &image);
-  mlx_put_image_to_window(vars.mlx, vars.win, image.img, 0, 0);
-  mlx_key_hook(vars.win, key_hook, &vars);
-  mlx_loop(vars.mlx);
+  init_mlx(&mlx);
+  matrix = make_matrix(*++argv, &mlx);
+  draw_by_dots(matrix, &mlx);
+  mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img, 0, 0);
+  mlx_key_hook(mlx.win, key_hook, &mlx);
+  mlx_loop(mlx.mlx);
   return(0);
 }
 

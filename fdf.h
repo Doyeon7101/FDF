@@ -6,7 +6,7 @@
 /*   By: dpark <dpark@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 05:14:45 by dpark             #+#    #+#             */
-/*   Updated: 2022/11/24 00:10:50 by dpark            ###   ########.fr       */
+/*   Updated: 2022/11/24 04:10:38 by dpark            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@
 #include <stdio.h>
 
 #ifndef BUFFER_SIZE
-# define BUFFER_SIZE 500
-#define WIN_W_SIZE 1920
-#define WIN_H_SIZE 1280
+# define BUFFER_SIZE 1000
+#define WIN_W_SIZE 2560 //full screen
+#define WIN_H_SIZE 1400
 #endif
 
 typedef struct  s_data {
@@ -67,7 +67,7 @@ char	*get_next_line(int fd);
 //draw_line
 void bresenham(t_dot c1, t_dot c2, t_data *image, int argb);
 void draw_by_dots(t_dot **matrix, t_data *data);
-void update_dots(t_dot *dot, int l, double theta);
+void update_dots(t_dot *dot, int l, double theta, t_data *data);
 
 //utils
 void ft_print_error(char *message);
@@ -77,5 +77,6 @@ size_t	func_chunk_cnt(char const *s, char c);
 int	ft_revers_strncmp(const char *s1, const char *s2, size_t n);
 void	ft_putstr_fd(char *s, int fd);
 int	ft_atoi(const char *str);
+int	ft_sstrchr(const char *s, int c);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: dpark <dpark@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 03:42:08 by dpark             #+#    #+#             */
-/*   Updated: 2022/11/23 23:30:55 by dpark            ###   ########.fr       */
+/*   Updated: 2022/11/24 03:52:17 by dpark            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,12 @@ int main(int argc, char **argv)
 }
 
 /**
+ int k= -1;
+  int a = -1;
 	while (matrix[++k])
 	{
-		while (++a < w)
-			printf("x : %d, y : %d, z : %d\n", matrix[0][a].x, matrix[0][a].y, matrix[0][a].z);
+		while (++a < mlx.w)
+			printf("x : %d, y : %d, z : %d, color : %d\n", matrix[k][a].x, matrix[k][a].y, matrix[k][a].z, matrix[0][a].color);
+    a = -1;
 	}
-  **/
+**/

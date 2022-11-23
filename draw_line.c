@@ -6,14 +6,13 @@
 /*   By: dpark <dpark@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 19:44:33 by dpark             #+#    #+#             */
-/*   Updated: 2022/11/24 00:14:06 by dpark            ###   ########.fr       */
+/*   Updated: 2022/11/24 04:22:57 by dpark            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
 // 넓이와 높이는 절대값으로 구해둠
-// if (a.x > 1280 || a.y > 720 || a.y < 0 || a.x < 0)
 void	bresenham(t_dot a, t_dot b, t_data *data, int argb)
 {
 	int	width = abs(a.x - b.x);
@@ -35,6 +34,8 @@ void	bresenham(t_dot a, t_dot b, t_data *data, int argb)
  				y += Yfactor;
 				det += (2 * height - 2 * width);
 			}
+			if (a.x > WIN_W_SIZE || a.y > WIN_H_SIZE || a.y < 0 || a.x < 0)
+				return;
 			mlx_pixel_put(data->mlx, data->win, x, y, argb);
 		}
 	}
@@ -51,6 +52,8 @@ void	bresenham(t_dot a, t_dot b, t_data *data, int argb)
 			x += Xfactor;
 			det2 += (2 * width - 2 * height);
 		}
+			if (a.x > WIN_W_SIZE || a.y > WIN_H_SIZE || a.y < 0 || a.x < 0)
+				return;
 			mlx_pixel_put(data->mlx, data->win, x, y, argb);
 		}
 	}
@@ -73,7 +76,7 @@ void	draw_by_dots(t_dot **matrix, t_data *data)
 	while (++y < data->h)
 	{
 		while (++x < data->w)
-			update_dots(&matrix[y][x],l,0.98719785039579);
+			update_dots(&matrix[y][x],l,0.523599, data);
 		x= -1;
 	}
 	x = 0;

@@ -6,7 +6,7 @@
 /*   By: dpark <dpark@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 19:58:48 by dpark             #+#    #+#             */
-/*   Updated: 2022/11/23 21:06:15 by dpark            ###   ########.fr       */
+/*   Updated: 2022/11/24 04:24:56 by dpark            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,15 @@ void	isomatic(t_dot *dot, double angle)
 	dot->y = (dot->x + dot->y) * sin(angle) - dot->z;
 }
 
-void	shift_dots(t_dot *dot)
+void	shift_dots(t_dot *dot, t_data *data)
 {
-	dot->x += 1920 / 3;
-	dot->y += 1280 / 3;
+	int x_shift;
+	int y_shift;
+
+	x_shift = (WIN_W_SIZE - data->w) / 2;
+	y_shift = (WIN_H_SIZE - data->h) / 2;
+	dot->x += x_shift;
+	dot->y += y_shift;
 }
 
 void	resizing_dots(t_dot *dot, int length)
@@ -31,9 +36,9 @@ void	resizing_dots(t_dot *dot, int length)
 	dot->z *= 10;
 }
 
-void	update_dots(t_dot *dot, int l, double theta)
+void	update_dots(t_dot *dot, int l, double theta, t_data *data)
 {
 	resizing_dots(dot, l);
 	isomatic(dot, theta);
-	shift_dots(dot);
+	shift_dots(dot, data);
 }

@@ -6,7 +6,7 @@
 /*   By: dpark <dpark@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 20:04:29 by dpark             #+#    #+#             */
-/*   Updated: 2022/11/23 23:29:32 by dpark            ###   ########.fr       */
+/*   Updated: 2022/11/24 03:25:42 by dpark            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,12 @@ int	ft_strchr(const char *s, int c)
 	i = 0;
 	if (!s)
 		return (-1);
-	while (1)
+	while (s[i++])
 	{
 		if (s[i] == (char)c)
 			return (i);
-		if (s[i] == '\0')
-			return (-1);
-		i++;
 	}
+	return(-1);
 }
 
 int	ft_strjoin(char **dest, char *s2)

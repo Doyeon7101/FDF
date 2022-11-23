@@ -19,19 +19,19 @@ double return_max(double a, double b)
 
 
 // 넓이와 높이는 절대값으로 구해둠
-void bresenham(t_dot endPosition, t_dot startPosition, t_data *image, int argb)
+void bresenham(t_dot a, t_dot b, t_data *image, int argb)
 {
-    int width = abs(endPosition.x - startPosition.x);
-    int height = abs(endPosition.y - startPosition.y);
-    int Yfactor = endPosition.y < startPosition.y ? -1 : 1;
-    int Xfactor = endPosition.x < startPosition.x ? -1 : 1;
+    int width = abs(a.x - b.x);
+    int height = abs(a.y - b.y);
+    int Yfactor = a.y < b.y ? -1 : 1;
+    int Xfactor = a.x < b.x ? -1 : 1;
 
     // 넓이가 높이보다 큰경우는 1,4,5,8 분면
     if (width > height)
     {
-     int y = startPosition.y;
+     int y = b.y;
      int det = (2 * height) - width; // 점화식
-     for (int x = startPosition.x; x != endPosition.x; x += Xfactor)
+     for (int x = b.x; x != a.x; x += Xfactor)
      {
       if (det < 0) //판별
   {
@@ -47,9 +47,9 @@ void bresenham(t_dot endPosition, t_dot startPosition, t_data *image, int argb)
 }
 else
 {
- int x = startPosition.x;
+ int x = b.x;
  int det2 = (2 * width) - height; // 점화식
- for (int y = startPosition.y; y != endPosition.y; y+= Yfactor)
+ for (int y = b.y; y != a.y; y+= Yfactor)
  {
   if (det2 < 0)
   {
@@ -107,8 +107,8 @@ void draw_by_dots(t_dot **matrix, t_data *data)
     w = data->w;
     x = -1;
     y = -1;
-    l = 40; //return_best_length
-    double theta = 1.04719785039579;
+    l = 80; //return_best_length
+    double theta = 0.98719785039579;
     while (++y < h)
     {
         while (++x < w)
@@ -130,9 +130,9 @@ void draw_by_dots(t_dot **matrix, t_data *data)
         while (1)
         {
 		    if (matrix[y + 1])
-                bresenham(matrix[y][x], matrix[y+1][x], data, create_argb(0,200,0,0));
+                bresenham(matrix[y][x], matrix[y+1][x], data, create_argb(0,0,255,0));
             if(x != w-1)
-                bresenham(matrix[y][x], matrix[y][x+1], data, create_argb(0, 200, 0, 0));
+                bresenham(matrix[y][x], matrix[y][x+1], data, create_argb(0, 0, 255, 0));
             else
 			    break ;
 		    x++;

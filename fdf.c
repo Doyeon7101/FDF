@@ -6,7 +6,7 @@
 /*   By: dpark <dpark@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 03:42:08 by dpark             #+#    #+#             */
-/*   Updated: 2022/11/23 17:06:39 by dpark            ###   ########.fr       */
+/*   Updated: 2022/11/23 18:50:26 by dpark            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ int main(int argc, char **argv)
     ft_print_error("error1");
   
   vars.mlx = mlx_init();
-  vars.win = mlx_new_window(vars.mlx, 1280, 720, "FDF");
-  image.img = mlx_new_image(vars.mlx, 1280, 720); // 이미지 객체 생성
+  vars.win = mlx_new_window(vars.mlx, 1920, 1280, "FDF");
+  image.img = mlx_new_image(vars.mlx, 1920, 1280); // 이미지 객체 생성
   image.addr = mlx_get_data_addr(image.img, &image.bits_per_pixel, &image.line_length, &image.endian); // 이미지 주소 할당
 
   matrix = make_matrix(*++argv, &image);

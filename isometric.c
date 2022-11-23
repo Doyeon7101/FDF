@@ -20,15 +20,15 @@ void iso(int *x, int *y, int *z, double theta)
 
 void shift_dots(t_dot *dot)
 {
-    dot->x += 1280/3;
-    dot->y += 720/3;
+    dot->x += 1920/3;
+    dot->y += 1280/3;
 }
 
 void resizing_dots(t_dot *dot, int length)
 {
     dot->x *= length;
     dot->y *= length;
-    dot->z *= 7;
+    dot->z *= length;
 }
 
 //isomatic theta : 0.523599

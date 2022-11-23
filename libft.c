@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   libft.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dpark <dpark@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: dpark <dpark@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 20:04:29 by dpark             #+#    #+#             */
-/*   Updated: 2022/11/20 16:17:45 by dpark            ###   ########.fr       */
+/*   Updated: 2022/11/23 19:50:45 by dpark            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,6 @@ size_t	ft_strlen(const char *str)
 	while (str[i])
 		i++;
 	return (i);
-}
-
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
-{
-	size_t	i;
-
-	i = 0;
-	if (dstsize <= 0)
-		return (ft_strlen(src));
-	while (src[i] && i < (dstsize - 1))
-	{
-		dst[i] = src[i];
-		i++;
-	}
-	dst[i] = '\0';
-	return (ft_strlen(src));
 }
 
 int	ft_strchr(const char *s, int c)
@@ -79,5 +63,29 @@ int	ft_strjoin(char **dest, char *s2)
 	if (*dest)
 		free(*dest);
 	*dest = c;
+	return (1);
+}
+
+void	ft_putstr_fd(char *s, int fd)
+{
+	while (*s)
+		write(fd, s++, 1);
+}
+
+int	ft_revers_strncmp(const char *s1, const char *s2, size_t n)
+{
+	int	i;
+	int	j;
+
+	i = ft_strlen(s1);
+	j = ft_strlen(s2);
+	while (n + 1 > 0)
+	{
+		if (s1[i] != s2[j])
+			return (0);
+		i--;
+		j--;
+		n--;
+	}
 	return (1);
 }

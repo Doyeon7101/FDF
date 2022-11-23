@@ -6,7 +6,7 @@
 /*   By: dpark <dpark@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 03:42:08 by dpark             #+#    #+#             */
-/*   Updated: 2022/11/23 18:50:26 by dpark            ###   ########.fr       */
+/*   Updated: 2022/11/23 20:12:20 by dpark            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,3 +46,11 @@ int main(int argc, char **argv)
   mlx_loop(vars.mlx);
   return(0);
 }
+
+/**
+	while (matrix[++k])
+	{
+		while (++a < w)
+			printf("x : %d, y : %d, z : %d\n", matrix[0][a].x, matrix[0][a].y, matrix[0][a].z);
+	}
+  **/

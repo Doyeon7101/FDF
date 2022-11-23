@@ -6,24 +6,15 @@
 /*   By: dpark <dpark@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 19:44:33 by dpark             #+#    #+#             */
-/*   Updated: 2022/11/23 20:41:45 by dpark            ###   ########.fr       */
+/*   Updated: 2022/11/24 00:14:06 by dpark            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = data->addr + (y * data->line_length +\
-	x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
-}
-
 // 넓이와 높이는 절대값으로 구해둠
 // if (a.x > 1280 || a.y > 720 || a.y < 0 || a.x < 0)
-void	bresenham(t_dot a, t_dot b, t_data *image, int argb)
+void	bresenham(t_dot a, t_dot b, t_data *data, int argb)
 {
 	int	width = abs(a.x - b.x);
 	int	height = abs(a.y - b.y);
@@ -44,7 +35,7 @@ void	bresenham(t_dot a, t_dot b, t_data *image, int argb)
  				y += Yfactor;
 				det += (2 * height - 2 * width);
 			}
-			my_mlx_pixel_put(image, x, y, argb);
+			mlx_pixel_put(data->mlx, data->win, x, y, argb);
 		}
 	}
 	else
@@ -60,7 +51,7 @@ void	bresenham(t_dot a, t_dot b, t_data *image, int argb)
 			x += Xfactor;
 			det2 += (2 * width - 2 * height);
 		}
-			my_mlx_pixel_put(image, x, y, argb);
+			mlx_pixel_put(data->mlx, data->win, x, y, argb);
 		}
 	}
 }
@@ -79,11 +70,10 @@ void	draw_by_dots(t_dot **matrix, t_data *data)
 	x = -1;
 	y = -1;
 	l = 30;
-	double theta = 0.98719785039579;
 	while (++y < data->h)
 	{
 		while (++x < data->w)
-			update_dots(&matrix[y][x],l, theta);
+			update_dots(&matrix[y][x],l,0.98719785039579);
 		x= -1;
 	}
 	x = 0;
@@ -102,5 +92,7 @@ void	draw_by_dots(t_dot **matrix, t_data *data)
 		}
 		x = 0;
 	}
+
+
 	return ;
 }

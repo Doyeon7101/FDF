@@ -6,7 +6,7 @@
 /*   By: dpark <dpark@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 20:04:29 by dpark             #+#    #+#             */
-/*   Updated: 2022/11/23 19:50:45 by dpark            ###   ########.fr       */
+/*   Updated: 2022/11/23 23:29:32 by dpark            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,4 +88,29 @@ int	ft_revers_strncmp(const char *s1, const char *s2, size_t n)
 		n--;
 	}
 	return (1);
+}
+
+int	ft_atoi(const char *str)
+{
+	long	r;
+	int		i;
+
+	r = 0;
+	i = 1;
+	while (*str == ' ' || *str == '\t' || *str == '\r' \
+		|| *str == '\n' || *str == '\v' || *str == '\f')
+		str++;
+	if (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			i *= -1;
+		str++;
+	}
+	while (*str && *str >= '0' && *str <= '9')
+	{
+		r *= 10;
+		r += *str - 48;
+		str++;
+	}
+	return (r * i);
 }

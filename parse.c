@@ -6,7 +6,7 @@
 /*   By: dpark <dpark@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 19:46:05 by dpark             #+#    #+#             */
-/*   Updated: 2022/11/23 19:58:24 by dpark            ###   ########.fr       */
+/*   Updated: 2022/11/24 00:18:29 by dpark            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,15 @@ void	add_to_matrix(char *file_name, t_dot **matrix, int x, int y)
 {
 	char	*line;
 	char	**z_value;
+	char	**color_value;
 	int		yp;
 	int		xp;
 	int		fd;
+	int		t;
 
 	yp = -1;
 	xp = -1;
+	t = 0;
 	fd = open(file_name, O_RDONLY);
 	if (fd == -1)
 		ft_print_error("open error");
@@ -70,7 +73,16 @@ void	add_to_matrix(char *file_name, t_dot **matrix, int x, int y)
 		{
 			matrix[yp][xp].x = xp;
 			matrix[yp][xp].y = yp;
-			matrix[yp][xp].z = atoi(z_value[xp]);
+			/**
+			if (ft_strchr(z_value[xp], ',')) //색상정보 찾기
+			{
+				color_value =ft_split(z_value[xp], 'c');
+				matrix[yp][xp].z = ft_atoi(color_value[t++]);
+				matrix[yp][xp].color = ft_atoi(color_value[t]);
+			}
+			else
+			**/
+				matrix[yp][xp].z = ft_atoi(z_value[xp]);
 		}
 		while (xp-- > 0)
 			free(z_value[xp]);

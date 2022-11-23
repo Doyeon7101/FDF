@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   FDF.c                                              :+:      :+:    :+:   */
+/*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dpark <dpark@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: dpark <dpark@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 03:42:08 by dpark             #+#    #+#             */
-/*   Updated: 2022/11/21 15:30:16 by dpark            ###   ########.fr       */
+/*   Updated: 2022/11/23 17:06:39 by dpark            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int main(int argc, char **argv)
   t_data image;
   t_color rgb;
   t_dot **matrix;
-  t_dot c1, c2;
 
   if (argc != 2)
     ft_print_error("error1");
@@ -42,18 +41,8 @@ int main(int argc, char **argv)
 
   matrix = make_matrix(*++argv, &image);
   draw_by_dots(matrix, &image);
-  // bresenham(c1, c2, &image, create_argb(0, rgb.r, rgb.g, rgb.b));
   mlx_put_image_to_window(vars.mlx, vars.win, image.img, 0, 0);
   mlx_key_hook(vars.win, key_hook, &vars);
   mlx_loop(vars.mlx);
   return(0);
 }
-
-/**
-<당신이 할것>
-2. 파싱 받아오기
-3. 파싱받아온 좌표 윈도우 크기에맞게 재배열
-4. 이렇게 구한 정점을 대상으로 각 정점 사이를 잇는 간선 브래잰험 함수 이용해서 서로 잇기
-1. 선형 보건법으로 그라데이션 색 구현
-아직도 궁금쓰. z좌표는 표현을 어케하라는거?
-**/

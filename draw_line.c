@@ -15,6 +15,59 @@ double return_max(double a, double b)
     else
         return(b);
 }
+
+
+
+// 넓이와 높이는 절대값으로 구해둠
+void bresenham(t_dot endPosition, t_dot startPosition, t_data *image, int argb)
+{
+    int width = abs(endPosition.x - startPosition.x);
+    int height = abs(endPosition.y - startPosition.y);
+    int Yfactor = endPosition.y < startPosition.y ? -1 : 1;
+    int Xfactor = endPosition.x < startPosition.x ? -1 : 1;
+
+    // 넓이가 높이보다 큰경우는 1,4,5,8 분면
+    if (width > height)
+    {
+     int y = startPosition.y;
+     int det = (2 * height) - width; // 점화식
+     for (int x = startPosition.x; x != endPosition.x; x += Xfactor)
+     {
+      if (det < 0) //판별
+  {
+           det += 2 * height;
+      }
+      else 
+  {
+   y += Yfactor;
+   det += (2 * height - 2 * width);
+  }
+    my_mlx_pixel_put(image, x, y, argb);
+ }
+}
+else
+{
+ int x = startPosition.x;
+ int det2 = (2 * width) - height; // 점화식
+ for (int y = startPosition.y; y != endPosition.y; y+= Yfactor)
+ {
+  if (det2 < 0)
+  {
+   det2 += 2 * width;
+  }
+  else
+  {
+   x += Xfactor;
+   det2 += (2 * width - 2 * height);
+  }
+    my_mlx_pixel_put(image, x, y, argb);
+ }
+}
+}
+
+
+
+/**
 void	bresenham(t_dot a, t_dot b, t_data *image, int argb)
 {
 	double dx;
@@ -35,12 +88,7 @@ void	bresenham(t_dot a, t_dot b, t_data *image, int argb)
 			break ;
 	}
 } 
-
-void update_dots(t_dot *dot, int length)
-{
-    dot->x *= length;
-    dot->y *= length;
-}
+**/
 
 int create_argb(int t, int r, int g, int b)
 {
@@ -59,57 +107,38 @@ void draw_by_dots(t_dot **matrix, t_data *data)
     w = data->w;
     x = -1;
     y = -1;
-    l = 40; // return_best_length
+    l = 40; //return_best_length
+    double theta = 1.04719785039579;
     while (++y < h)
     {
-        while (++x < data->w)
-            update_dots(&matrix[y][x],l);
+        while (++x < w)
+            update_dots(&matrix[y][x],l, theta);
         x= -1;
     }
+	x = 0;
     y = -1;
-    x = -1;
-    while (++y < h-1)
+    int k = -1;
+    int a = -1;
+    while (matrix[++k])
     {
-        while ((++x < w-1))
+        while (++a < w)
+            printf("x : %d, y : %d, z : %d\n", matrix[0][a].x, matrix[0][a].y, matrix[0][a].z);
+    }
+
+	while (matrix[++y])
+	{
+        while (1)
         {
-            bresenham(matrix[y][x], matrix[y][x+1], data, create_argb(0,102,255,178));
-            bresenham(matrix[y][x], matrix[y+1][x], data, create_argb(0,102,255,178));
+		    if (matrix[y + 1])
+                bresenham(matrix[y][x], matrix[y+1][x], data, create_argb(0,200,0,0));
+            if(x != w-1)
+                bresenham(matrix[y][x], matrix[y][x+1], data, create_argb(0, 200, 0, 0));
+            else
+			    break ;
+		    x++;
         }
-        x = -1;
-    }
-    x = -1;
-    y = -1;
-    while (++x < w-1)
-        bresenham(matrix[h-1][x], matrix[h-1][x+1], data, create_argb(0,102,255,178));
-    while (++y < h-1)
-        bresenham(matrix[y][w-1], matrix[y+1][w-1], data, create_argb(0,102,255,178));
-    return;
+        x = 0;
+	}
 
+    return ;
 }
-
-
-
-/** note
-    while (++y < data->h)
-    {
-        while (++x < data->w-1)
-            update_dots(&matrix[y][x],l);
-        x= -1;
-    }
-    y = -1;
-    x = -1;
-    while (++y < data->h)
-    {
-        while (++x < data->w - 1)
-            bresenham(matrix[y][x], matrix[y][x+1], data, create_argb(0, 0,255,0));
-        x = -1;
-    }
-    y = -1;
-    x = -1;
-    while (++x < data->w)
-    {
-        while (++y < data->h - 1)
-            bresenham(matrix[y][x], matrix[y+1][x], data, create_argb(0, 0,255,0));
-        y = -1;
-
-**/

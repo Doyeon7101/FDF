@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dpark <dpark@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: dpark <dpark@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 05:14:45 by dpark             #+#    #+#             */
-/*   Updated: 2022/11/21 14:56:01 by dpark            ###   ########.fr       */
+/*   Updated: 2022/11/23 15:56:10 by dpark            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ char	*get_next_line(int fd);
 //draw_line
 void bresenham(t_dot c1, t_dot c2, t_data *image, int argb);
 void draw_by_dots(t_dot **matrix, t_data *data);
+void update_dots(t_dot *dot, int l, double theta);
 
 //utils
 void ft_print_error(char *message);

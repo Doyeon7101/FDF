@@ -57,13 +57,13 @@ void add_to_matrix(char *file_name, t_dot **matrix, int x, int y)
             matrix[yp][xp].x = xp;
             matrix[yp][xp].y = yp;
             matrix[yp][xp].z = atoi(z_value[xp]);
-            
         }
         while (xp-- > 0)
             free(z_value[xp]);
         free(line);
     }
-        close(fd);
+    matrix[y] = NULL;
+    close(fd);
 }
 
 t_dot **allocate_memory_for_matrix(char *file_name, int *x, int *y, int fd)

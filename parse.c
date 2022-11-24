@@ -6,7 +6,7 @@
 /*   By: dpark <dpark@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 19:46:05 by dpark             #+#    #+#             */
-/*   Updated: 2022/11/24 04:15:36 by dpark            ###   ########.fr       */
+/*   Updated: 2022/11/24 20:50:32 by dpark            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,14 +78,14 @@ void	add_to_matrix(char *file_name, t_dot **matrix, int x, int y)
 			{
 				color_value = ft_split(z_value[xp], ',');
 				matrix[yp][xp].z = atoi(color_value[++t]);
-				matrix[yp][xp].color = atoi(color_value[++t]);
+				matrix[yp][xp].color = ft_atoi_base(color_value[++t], "0123456789ABCDEF");
 				while (t-- > 0)
 					free(color_value[t]);
 			}
 			else
 			{
 				matrix[yp][xp].z = ft_atoi(z_value[xp]);
-				matrix[yp][xp].color = 0;
+				matrix[yp][xp].color = 0XFFFFFF;
 			}
 		}
 		while (xp-- > 0)

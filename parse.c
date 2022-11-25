@@ -6,7 +6,7 @@
 /*   By: dpark <dpark@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 19:46:05 by dpark             #+#    #+#             */
-/*   Updated: 2022/11/24 20:50:32 by dpark            ###   ########.fr       */
+/*   Updated: 2022/11/25 16:59:04 by dpark            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ t_dot	**malloc_arry(int x, int y)
 	return (new);
 }
 
-#include <string.h>
 void	add_to_matrix(char *file_name, t_dot **matrix, int x, int y)
 {
 	char	*line;

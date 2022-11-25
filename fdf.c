@@ -6,52 +6,53 @@
 /*   By: dpark <dpark@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 03:42:08 by dpark             #+#    #+#             */
-/*   Updated: 2022/11/25 16:04:48 by dpark            ###   ########.fr       */
+/*   Updated: 2022/11/25 16:50:56 by dpark            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void init_mlx(t_data *mlx)
+void	init_mlx(t_data *mlx)
 {
-  mlx->mlx = mlx_init();
-  mlx->win = mlx_new_window(mlx->mlx, WIN_W_SIZE, WIN_H_SIZE, "FDF");
-  mlx->img = mlx_new_image(mlx->mlx, WIN_W_SIZE, WIN_H_SIZE); // 이미지 객체 생성
+	mlx->mlx = mlx_init();
+	mlx->win = mlx_new_window(mlx->mlx, WIN_W_SIZE, WIN_H_SIZE, "FDF");
+	mlx->img = mlx_new_image(mlx->mlx, WIN_W_SIZE, WIN_H_SIZE);
 }
 
-int key_hook(int keycode, t_data *image)
+int	key_hook(int keycode, t_data *image)
 {
-  if(keycode == 53)
-  {
-    mlx_destroy_window(image->mlx, image->win);
-    exit(0);
-  }
-  return(0);
+	if (keycode == 53)
+	{
+		mlx_destroy_window(image->mlx, image->win);
+		exit (0);
+	}
+	return (0);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-  t_dot   **matrix;
-  t_data  mlx;
+	t_dot		**matrix;
+	t_data	mlx;
 
-  if (argc != 2)
-    ft_print_error("argc error");
-  init_mlx(&mlx);
-  matrix = make_matrix(*++argv, &mlx);
-  draw_by_dots(matrix, &mlx);
-  mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img, 0, 0);
-  mlx_key_hook(mlx.win, key_hook, &mlx);
-  mlx_loop(mlx.mlx);
-  return (0);
+	mlx.length = 30;
+	if (argc != 2)
+		ft_print_error("argc error");
+	init_mlx(&mlx);
+	matrix = make_matrix(*++argv, &mlx);
+	draw_by_dots(matrix, &mlx);
+	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img, 0, 0);
+	mlx_key_hook(mlx.win, key_hook, &mlx);
+	mlx_loop(mlx.mlx);
+	return (0);
 }
 
 /**
  int k= -1;
-  int a = -1;
+	int a = -1;
 	while (matrix[++k])
 	{
 		while (++a < mlx.w)
 			printf("x : %d, y : %d, z : %d, color : %d\n", matrix[k][a].x, matrix[k][a].y, matrix[k][a].z, matrix[0][a].color);
-    a = -1;
+		a = -1;
 	}
 **/

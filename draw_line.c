@@ -6,7 +6,7 @@
 /*   By: dpark <dpark@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 19:44:33 by dpark             #+#    #+#             */
-/*   Updated: 2022/11/25 16:06:10 by dpark            ###   ########.fr       */
+/*   Updated: 2022/11/25 16:48:44 by dpark            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,8 @@ void	draw_by_dots(t_dot **matrix, t_data *data)
 {
 	int	x;
 	int	y;
-	int l;
 
-	x = -1;
-	y = -1;
-	l = 30;
-	while (++y < data->h)
-	{
-		while (++x < data->w)
-			update_dots(&matrix[y][x], l, 0.523599, data);
-		x = -1;
-	}
+	update_dots(matrix, data->length, 0.52359, data);
 	x = 0;
 	y = -1;
 	while (matrix[++y])

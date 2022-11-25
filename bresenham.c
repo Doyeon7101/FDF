@@ -6,7 +6,7 @@
 /*   By: dpark <dpark@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 15:08:25 by dpark             #+#    #+#             */
-/*   Updated: 2022/11/25 16:05:47 by dpark            ###   ########.fr       */
+/*   Updated: 2022/11/25 16:08:55 by dpark            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_factor(int a, int b)
 	return (1);
 }
 
-void	more_than_one(t_dot a, t_dot b, t_data *data, int xfactor, int yfactor)
+void	more_than_one(t_dot a, t_dot b, t_data *data)
 {
 	int	x;
 	int	y;
@@ -45,17 +45,17 @@ void	more_than_one(t_dot a, t_dot b, t_data *data, int xfactor, int yfactor)
 			det += 2 * width;
 		else
 		{
-			x += xfactor;
+			x += data->xfactor;
 			det += (2 * width - 2 * height);
 		}
 		if (a.x > WIN_W_SIZE || a.y > WIN_H_SIZE || a.y < 0 || a.x < 0)
 			return ;
 		mlx_pixel_put(data->mlx, data->win, x, y, a.color);
-		y += yfactor;
+		y += data->yfactor;
 	}
 }
 
-void	less_than_one(t_dot a, t_dot b, t_data *data, int xfactor, int yfactor)
+void	less_than_one(t_dot a, t_dot b, t_data *data)
 {
 	int	x;
 	int	y;
@@ -74,13 +74,13 @@ void	less_than_one(t_dot a, t_dot b, t_data *data, int xfactor, int yfactor)
 			det += 2 * height;
 		else
 		{
-			y += yfactor;
+			y += data->yfactor;
 			det += (2 * height - 2 * width);
 		}
 		if (a.x > WIN_W_SIZE || a.y > WIN_H_SIZE || a.y < 0 || a.x < 0)
 			return ;
 		mlx_pixel_put(data->mlx, data->win, x, y, a.color);
-		x += xfactor;
+		x += data->xfactor;
 	}
 }
 
@@ -88,15 +88,13 @@ void	bresenham(t_dot a, t_dot b, t_data *data)
 {
 	int	width;
 	int	height;
-	int xfactor;
-	int yfactor;
 
 	width = ft_abs(a.x - b.x);
 	height = ft_abs(a.y - b.y);
-	xfactor = ft_factor(a.x, b.x);
-	yfactor = ft_factor(a.y, b.y);
+	data->xfactor = ft_factor(a.x, b.x);
+	data->yfactor = ft_factor(a.y, b.y);
 	if (width > height) // 1,4,5,8분면
-		less_than_one(a, b, data, xfactor, yfactor);
+		less_than_one(a, b, data);
 	else // 2,3,6,7 분면
-		more_than_one(a, b, data, xfactor, yfactor);
+		more_than_one(a, b, data);
 }

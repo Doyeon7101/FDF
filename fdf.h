@@ -6,7 +6,7 @@
 /*   By: dpark <dpark@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 05:14:45 by dpark             #+#    #+#             */
-/*   Updated: 2022/11/25 15:32:12 by dpark            ###   ########.fr       */
+/*   Updated: 2022/11/25 16:54:40 by dpark            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 #ifndef BUFFER_SIZE
 # define BUFFER_SIZE 1000
@@ -35,6 +36,7 @@ typedef struct  s_data{
   double      theta;
   int         xfactor;
   int         yfactor;
+  int         length;
 }   t_data;
 
 typedef struct s_dot{
@@ -68,8 +70,8 @@ char	*get_next_line(int fd);
 
 //draw_line
 void draw_by_dots(t_dot **matrix, t_data *data);
-void update_dots(t_dot *dot, int l, double theta, t_data *data);
 void	bresenham(t_dot a, t_dot b, t_data *data);
+void	update_dots(t_dot **matrix, int l, double theta, t_data *data);
 
 //utils
 void ft_print_error(char *message);

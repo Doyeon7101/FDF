@@ -6,7 +6,7 @@
 /*   By: dpark <dpark@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 20:04:29 by dpark             #+#    #+#             */
-/*   Updated: 2022/11/24 03:25:42 by dpark            ###   ########.fr       */
+/*   Updated: 2022/11/25 16:53:18 by dpark            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	ft_strchr(const char *s, int c)
 		if (s[i] == (char)c)
 			return (i);
 	}
-	return(-1);
+	return (-1);
 }
 
 int	ft_strjoin(char **dest, char *s2)

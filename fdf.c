@@ -6,7 +6,7 @@
 /*   By: dpark <dpark@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 03:42:08 by dpark             #+#    #+#             */
-/*   Updated: 2022/11/25 17:29:10 by dpark            ###   ########.fr       */
+/*   Updated: 2022/11/25 19:18:22 by dpark            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,21 +40,8 @@ int	main(int argc, char **argv)
 	init_mlx(&mlx);
 	matrix = make_matrix(*++argv, &mlx);
 	draw_by_dots(matrix, &mlx);
-	// if (!draw_by_dots(matrix, &mlx))
-		// ft_print_error("Invalid length. enter the correct length");
 	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img, 0, 0);
 	mlx_key_hook(mlx.win, key_hook, &mlx);
 	mlx_loop(mlx.mlx);
 	return (0);
 }
-
-/**
- int k= -1;
-	int a = -1;
-	while (matrix[++k])
-	{
-		while (++a < mlx.w)
-			printf("x : %d, y : %d, z : %d, color : %d\n", matrix[k][a].x, matrix[k][a].y, matrix[k][a].z, matrix[0][a].color);
-		a = -1;
-	}
-**/

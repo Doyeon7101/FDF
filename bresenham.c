@@ -6,7 +6,7 @@
 /*   By: dpark <dpark@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 15:08:25 by dpark             #+#    #+#             */
-/*   Updated: 2022/11/25 16:08:55 by dpark            ###   ########.fr       */
+/*   Updated: 2022/11/25 19:17:57 by dpark            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,8 @@ void	bresenham(t_dot a, t_dot b, t_data *data)
 	height = ft_abs(a.y - b.y);
 	data->xfactor = ft_factor(a.x, b.x);
 	data->yfactor = ft_factor(a.y, b.y);
-	if (width > height) // 1,4,5,8분면
+	if (width > height)
 		less_than_one(a, b, data);
-	else // 2,3,6,7 분면
+	else
 		more_than_one(a, b, data);
 }

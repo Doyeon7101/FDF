@@ -6,7 +6,7 @@
 /*   By: dpark <dpark@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 20:04:29 by dpark             #+#    #+#             */
-/*   Updated: 2022/11/25 16:53:18 by dpark            ###   ########.fr       */
+/*   Updated: 2022/11/25 19:21:30 by dpark            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,24 +68,6 @@ void	ft_putstr_fd(char *s, int fd)
 {
 	while (*s)
 		write(fd, s++, 1);
-}
-
-int	ft_revers_strncmp(const char *s1, const char *s2, size_t n)
-{
-	int	i;
-	int	j;
-
-	i = ft_strlen(s1);
-	j = ft_strlen(s2);
-	while (n + 1 > 0)
-	{
-		if (s1[i] != s2[j])
-			return (0);
-		i--;
-		j--;
-		n--;
-	}
-	return (1);
 }
 
 int	ft_atoi(const char *str)

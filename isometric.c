@@ -6,7 +6,7 @@
 /*   By: dpark <dpark@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 19:58:48 by dpark             #+#    #+#             */
-/*   Updated: 2022/11/25 19:14:33 by dpark            ###   ########.fr       */
+/*   Updated: 2022/11/25 19:18:52 by dpark            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	shift_dots(t_dot *dot, t_data *data)
 	{
 		x_shift = (WIN_W_SIZE - data->w) / 6;
 		y_shift = (WIN_H_SIZE - data->h) / 6;
-
 	}
 	x_shift = (WIN_W_SIZE - data->w) / 2;
 	y_shift = (WIN_H_SIZE - data->h) / 2;

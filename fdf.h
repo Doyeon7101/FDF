@@ -6,7 +6,7 @@
 /*   By: dpark <dpark@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 05:14:45 by dpark             #+#    #+#             */
-/*   Updated: 2022/11/25 17:30:14 by dpark            ###   ########.fr       */
+/*   Updated: 2022/11/25 19:59:07 by dpark            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,10 @@ typedef struct s_data{
 	int		xfactor;
 	int		yfactor;
 	int		length;
+	int		x;
+	int		y;
+	int		xp;
+	int		yp;
 }	t_data;
 
 typedef struct s_dot{
@@ -69,5 +73,6 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 int		ft_strjoin(char **dest, char *s2);
 int		ft_strchr(const char *s, int c);
 char	*get_next_line(int fd);
+void	check_array_size(char *file_name, int *x, int *y);
 
 #endif

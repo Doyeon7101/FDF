@@ -6,7 +6,7 @@
 /*   By: dpark <dpark@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 03:42:08 by dpark             #+#    #+#             */
-/*   Updated: 2022/11/25 16:50:56 by dpark            ###   ########.fr       */
+/*   Updated: 2022/11/25 17:29:10 by dpark            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,16 @@ int	key_hook(int keycode, t_data *image)
 int	main(int argc, char **argv)
 {
 	t_dot		**matrix;
-	t_data	mlx;
+	t_data		mlx;
 
-	mlx.length = 30;
+	mlx.length = 25;
 	if (argc != 2)
 		ft_print_error("argc error");
 	init_mlx(&mlx);
 	matrix = make_matrix(*++argv, &mlx);
 	draw_by_dots(matrix, &mlx);
+	// if (!draw_by_dots(matrix, &mlx))
+		// ft_print_error("Invalid length. enter the correct length");
 	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img, 0, 0);
 	mlx_key_hook(mlx.win, key_hook, &mlx);
 	mlx_loop(mlx.mlx);

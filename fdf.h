@@ -6,7 +6,7 @@
 /*   By: dpark <dpark@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 05:14:45 by dpark             #+#    #+#             */
-/*   Updated: 2022/11/25 19:59:07 by dpark            ###   ########.fr       */
+/*   Updated: 2022/11/25 20:11:08 by dpark            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,13 @@
 # include <math.h>
 # include <stdlib.h>
 # include <stdio.h>
-# include <string.h>
 
 # ifndef BUFFER_SIZE
-# define BUFFER_SIZE 1000
-# define WIN_W_SIZE 2560 //full screen
-# define WIN_H_SIZE 1400
+#  define BUFFER_SIZE 1000
+# endif
+# ifndef WIN_SIZE
+#  define WIN_W_SIZE 2560
+#  define WIN_H_SIZE 1400
 # endif
 
 typedef struct s_data{

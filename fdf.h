@@ -6,7 +6,7 @@
 /*   By: dpark <dpark@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 05:14:45 by dpark             #+#    #+#             */
-/*   Updated: 2022/11/24 20:52:17 by dpark            ###   ########.fr       */
+/*   Updated: 2022/11/25 15:32:12 by dpark            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,16 @@
 #define WIN_H_SIZE 1400
 #endif
 
-typedef struct  s_data {
+typedef struct  s_data{
   void        *img;
   int         h;
   int         w;
   void        *mlx;
   void        *win;
   double      theta;
-}               t_data;
+  int         xfactor;
+  int         yfactor;
+}   t_data;
 
 typedef struct s_dot{
   int x;
@@ -67,6 +69,7 @@ char	*get_next_line(int fd);
 //draw_line
 void draw_by_dots(t_dot **matrix, t_data *data);
 void update_dots(t_dot *dot, int l, double theta, t_data *data);
+void	bresenham(t_dot a, t_dot b, t_data *data);
 
 //utils
 void ft_print_error(char *message);

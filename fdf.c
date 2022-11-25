@@ -6,7 +6,7 @@
 /*   By: dpark <dpark@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 03:42:08 by dpark             #+#    #+#             */
-/*   Updated: 2022/11/24 03:52:17 by dpark            ###   ########.fr       */
+/*   Updated: 2022/11/25 16:04:48 by dpark            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,8 @@ int key_hook(int keycode, t_data *image)
 
 int main(int argc, char **argv)
 {
-  t_data mlx;
-  t_color rgb;
-  t_dot **matrix;
+  t_dot   **matrix;
+  t_data  mlx;
 
   if (argc != 2)
     ft_print_error("argc error");

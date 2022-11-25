@@ -1,35 +1,37 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: dpark <dpark@student.42.fr>                +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/11/25 17:58:14 by dpark             #+#    #+#              #
+#    Updated: 2022/11/25 18:23:26 by dpark            ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = fdf
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
-
+FRAEMWORKS = -framework OpenGL -framework AppKit
 RM = rm -f
+CFLAGS = -Werror -Wextra -Wall
+INCLUDES = minilibx/libmlx.dylib
 
-SRC_DIR = ./srcs/
-SRC2_DIR = ./srcs/
+SRC = bresenham.c draw_line.c fdf.c ft_atoi_base.c  \
+	ft_print_error.c ft_split.c  get_next_line.c isometric.c libft.c parse.c
 
-SRC_FILES = a_to_b.c b_to_a.c ft_split.c libft.c libft2.c \
-			operation.c parse.c push_swap.c utils_stack.c algo_utils.c
-
-SRC_OBJ = $(SRC_FILES:.c=.o)
-
-all: $(NAME)
-
-%.o: %.c
-	$(CC) $(CFLAGS) -o $@ -c $<
-
-$(NAME): $(SRC_OBJ)
-	$(CC) $(CFLAGS) -o $(NAME) $(SRC_OBJ)
+all:
+	make -C minilibx/ all
+	$(CC) $(SRC) -o $(NAME) $(CFLAGS) $(INCLUDES) $(FRAEMWORKS)
 
 clean:
 	$(RM) $(SRC_OBJ)
+	make -C minilibx/ clean
+	$(RM) mlx.h.gch
 
-fclean:
+fclean: clean
 	make clean
 	$(RM) $(NAME)
 
-re:
-	make fclean
-	make all
-
-.PHONY: all clean fclean re
+re: fclean all

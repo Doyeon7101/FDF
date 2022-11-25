@@ -6,7 +6,7 @@
 /*   By: dpark <dpark@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 19:46:05 by dpark             #+#    #+#             */
-/*   Updated: 2022/11/25 16:59:04 by dpark            ###   ########.fr       */
+/*   Updated: 2022/11/25 17:38:34 by dpark            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	check_array_size(char *file_name, int *x, int *y)
 	*x = func_chunk_cnt(line, ' ');
 	while (line)
 	{
-		if (*x != func_chunk_cnt(line, ' '))
+		if (*x != (int)func_chunk_cnt(line, ' '))
 			ft_print_error("invalid map size");
 		(*y)++;
 		free(line);
@@ -95,7 +95,7 @@ void	add_to_matrix(char *file_name, t_dot **matrix, int x, int y)
 	close(fd);
 }
 
-t_dot	**allocate_memory_for_matrix(char *file_name, int *x, int *y, int fd)
+t_dot	**allocate_memory_for_matrix(char *file_name, int *x, int *y)
 {
 	t_dot	**new;
 
@@ -107,14 +107,12 @@ t_dot	**allocate_memory_for_matrix(char *file_name, int *x, int *y, int fd)
 t_dot	**make_matrix(char *file_name, t_data *data)
 {
 	t_dot	**matrix;
-	char	*line;
-	int		fd;
 	int		x;
 	int		y;
 
 	if (!ft_revers_strncmp(file_name, ".fdf", 4))
 		ft_print_error("Invalid extension name");
-	matrix = allocate_memory_for_matrix(file_name, &x, &y, fd);
+	matrix = allocate_memory_for_matrix(file_name, &x, &y);
 	add_to_matrix(file_name, matrix, x, y);
 	data->h = y;
 	data->w = x;
